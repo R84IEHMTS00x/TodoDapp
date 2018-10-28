@@ -20,12 +20,11 @@ contract Todo {
         emit newTask(id, _description, false);
     }
 
-    function getTaskIds(address _owner) external view returns (uint [])
-    {
+    function getTaskIds(address _owner) external view returns (uint[]) {
         uint[] memory result = new uint[](ownerTaskCount[_owner]);
 
         uint counter = 0;
-        for(uint i=0; i < tasks.length; i++) {
+        for (uint i = 0; i < tasks.length; i++) {
             if(taskToOwner[i] == _owner) {
                 result[counter] = i;
                 counter++;
@@ -35,10 +34,8 @@ contract Todo {
         return result;
     }
 
-    function completeTask(uint _taskid) public {
+    function completeTask(uint _taskId) public {
         require(msg.sender == taskToOwner[_taskId]);
-        tasks[_taskid].isCompleted = true;
+        tasks[_taskId].isCompleted = true;
     }
-//truffle-contract
-//Contract.tasks(id)
 }
